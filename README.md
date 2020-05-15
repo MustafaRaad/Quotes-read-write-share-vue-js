@@ -1,7 +1,7 @@
 # Mustafa Raad Mutashar 
 ## copyright 2019
 ## complete Front-end Web Application
-# mr
+
 
 ## vue-cli
 > A Vue.js project
@@ -15,8 +15,7 @@ npm run dev
 
 # build for production with minification
 npm run build
-------
-## Project 
+
 ```
 yarn install
 ```
