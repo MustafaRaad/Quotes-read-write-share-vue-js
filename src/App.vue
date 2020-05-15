@@ -1,48 +1,56 @@
 <template>
-    <div class="container">
-        <app-header :quoteCount="quotes.length" :maxQuotes="maxQuotes"></app-header>
-        <app-new-quote @quoteAdded="newQuote"></app-new-quote>
-        <app-quote-grid :quotes="quotes" @quoteDeleted="deleteQuote"></app-quote-grid>
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                <div class="alert alert-info">Info: Click on a Quote to delete it!</div>
-            </div>
-        </div>
+  <div class="container">
+    <app-header class="text-center row" :quoteCount="quotes.length" :maxQuotes="maxQuotes"></app-header>
+    <new-quote @quoteAdded="newQuote" class="row col-12"></new-quote>
+    <quote-grid class="row" v-bind:quotes="quotes" @quoteDeleted="deleteQuote"></quote-grid>
+    <div class="row">
+      <div class="col-12 text-center">
+        <div class="alert alert-info">Info: Click on a quote</div>
+        <button @click="modInverse(15,26)">modInverse</button>
+        <h1>{{modInverse()}}</h1>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-    import QuoteGrid from './components/QuoteGrid.vue';
-    import NewQuote from './components/NewQuote.vue';
-    import Header from './components/Header.vue';
+import QuoteGrid from "./components/QuoteGrid";
+import NewQuote from "./components/NewQuote";
+import Header from "./components/Header";
+export default {
+  data() {
+    return {
+      quotes: ["Mustafa"],
+      maxQuotes: 10
+    };
+  },
+  components: {
+    QuoteGrid,
+    NewQuote,
+    appHeader: Header
+  },
+  methods: {
+    newQuote(quote) {
+      if (this.quotes.length >= this.maxQuotes) {
+        return alert("Fuck you i said < 10");
+      }
+      this.quotes.push(quote);
+    },
+    deleteQuote(index) {
+      this.quotes.splice(index, 1);
+    },
+    modInverse(a, b) {
+      a %= b;
+      console.log("a%=b = ", a % b);
 
-    export default {
-        data: function () {
-            return {
-                quotes: [
-                    'Just a Quote to see something'
-                ],
-                maxQuotes: 10
-            }
-        },
-        methods: {
-            newQuote(quote) {
-                if (this.quotes.length >= this.maxQuotes) {
-                    return alert('Please delete Quotes first!');
-                }
-                this.quotes.push(quote);
-            },
-            deleteQuote(index) {
-                this.quotes.splice(index, 1);
-            }
-        },
-        components: {
-            appQuoteGrid: QuoteGrid,
-            appNewQuote: NewQuote,
-            appHeader: Header
+      for (var n = 1; n < b; n++) {
+        if ((a * n) % b == 1) {
+          console.log("n = ", n)
+          return n;
         }
+        console.log("(a*n)%b = ", (a * n) % b);
+      }
     }
+  }
+};
 </script>
-
-<style>
-</style>
